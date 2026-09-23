@@ -1,0 +1,28 @@
+protocol:
+  version: 1
+  endian: little
+
+telemetry:
+  IMU:
+    packet_id: 0x01
+    rate_hz: 50
+    data:
+      - name: a_x
+        type: int16_t
+      - name: a_y
+        type: int16_t
+      - name: a_z
+        type: int16_t
+      - name: roll
+        type: int16_t
+      - name: pitch
+        type: int16_t
+      - name: yaw
+        type: int16_t
+
+commands:
+  OPEN_VALVE:
+    command_id: 0x10
+    arguments:
+      - name: valve_id
+        type: uint8
