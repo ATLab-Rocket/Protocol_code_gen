@@ -1,6 +1,6 @@
 # Telemetry Protocol Generator
 
-一套用於**火箭飛控（Rocket / STM32）**與**地面站（Ground Station）**之間的通訊協定程式碼產生器（Code Generator）。
+一套用於**火箭飛控（Rocket / STM32）** 與 **地面站（Ground Station）** 之間的通訊協定程式碼產生器（Code Generator）。
 
 核心設計理念是以單一 `protocol.yaml` 作為 **Single Source of Truth（唯一真實來源）**，自動解析、驗證並產生飛控端與地面站端的協定封包定義與序列化（encode / decode）程式碼，確保雙邊實作完全一致。
 
@@ -19,7 +19,6 @@ Protocol Model
       │
       ├──► Rocket C Generator        ──► generated/rocket/{protocol.h, protocol.c}
       ├──► Ground C Generator        ──► generated/ground/{protocol.h, protocol.c}
-      └──► Ground Python Generator   ──► Python module (.py)
 ```
 
 ### 各端職責
@@ -27,7 +26,7 @@ Protocol Model
 | 端點 | 支援語言 | 負責功能 |
 | :--- | :--- | :--- |
 | **Rocket（飛控端 / STM32）** | C (`protocol.h` / `protocol.c`) | **Encode Telemetry**（打包遙測資料）<br>**Decode Command**（解析控制指令） |
-| **Ground Station（地面站）** | C (`protocol.h` / `protocol.c`)<br>Python (`.py`) | **Decode Telemetry**（解析遙測資料）<br>**Encode Command**（打包控制指令） |
+| **Ground Station（地面站）** | C (`protocol.h` / `protocol.c`) | **Decode Telemetry**（解析遙測資料）<br>**Encode Command**（打包控制指令） |
 
 ---
 
@@ -48,14 +47,14 @@ Protocol Model
 
 ### 支援資料型別（Scalar Types）
 
-| YAML 型別（支援別名） | C 型別 | Python `struct` | 大小 (Bytes) |
-| :--- | :--- | :--- | :---: |
-| `uint8` / `uint8_t` | `uint8_t` | `B` | 1 |
-| `int16` / `int16_t` | `int16_t` | `h` | 2 |
-| `uint16` / `uint16_t` | `uint16_t` | `H` | 2 |
-| `int32` / `int32_t` | `int32_t` | `i` | 4 |
-| `uint32` / `uint32_t` | `uint32_t` | `I` | 4 |
-| `float32` | `float` | `f` | 4 |
+| YAML 型別（支援別名） | C 型別 | 大小 (Bytes) |
+| :--- | :--- | :---: |
+| `uint8` / `uint8_t` | `uint8_t` | 1 |
+| `int16` / `int16_t` | `int16_t` | 2 |
+| `uint16` / `uint16_t` | `uint16_t` | 2 |
+| `int32` / `int32_t` | `int32_t` | 4 |
+| `uint32` / `uint32_t` | `uint32_t` | 4 |
+| `float32` | `float` | 4 |
 
 ---
 
@@ -112,12 +111,6 @@ python -m venv .venv
 
   ```powershell
   .\.venv\Scripts\python generate_protocol.py protocol.yaml --ground-output-dir generated/ground
-  ```
-
-- **產生地面站（Ground Station）Python 模組：**
-
-  ```powershell
-  .\.venv\Scripts\python generate_protocol.py protocol.yaml --python-output generated/ground/protocol.py
   ```
 
 - **單獨產生 Header 檔（選用）：**
